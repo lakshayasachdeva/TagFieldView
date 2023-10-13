@@ -50,7 +50,7 @@ fileprivate struct TagView: View {
     @Environment(\.colorScheme) private var colorScheme
     var body: some View {
         
-        BackspaceListenerTextField(placeholderText: "Tag", text: $tag.value) {
+        BackspaceListenerTextField(placeholderText: "Write something here...", text: $tag.value) {
             if allTags.count > 1 {
                 if tag.value.isEmpty {
                     allTags.removeAll (where:{ $0.id == tag.id })
@@ -63,7 +63,7 @@ fileprivate struct TagView: View {
         .focused($isFocussed)
         .padding(.horizontal, isFocussed || tag.value.isEmpty ? 0 : 10)
         .padding(.vertical, 10)
-        .background((colorScheme == .dark ? Color.black : Color.blue).opacity(isFocussed || tag.value.isEmpty ? 0 : 1), in: .rect(cornerRadius: 5))
+        .background((colorScheme == .dark ? Color.black : Color.gray).opacity(isFocussed || tag.value.isEmpty ? 0 : 1), in: .rect(cornerRadius: 5))
         .disabled(tag.isInitial)
         .onChange(of: allTags, { oldValue, newValue in
             if newValue.last?.id == tag.id && !(newValue.last?.isInitial ?? false) && !isFocussed {
